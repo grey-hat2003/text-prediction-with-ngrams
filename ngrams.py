@@ -9,10 +9,10 @@ transitions = {}
 
 def add_to_dict(diction, key, val):
     if key not in diction:
-        dict[key] = []
+        diction[key] = []
         #making an empty list as a value for the new key
     
-    dict[key].append(val)
+    diction[key].append(val)
 
 def update_dict(diction, key, val):
     if key not in diction:
@@ -111,10 +111,10 @@ def suggestions(in_put):
 
     return []
 
-train_markov()
+#train_markov()
 
-print(first_words)
-print()
-print(second_words)
-print()
-print(transitions)
+# print(first_words)
+# print()
+# print(second_words)
+# print()
+# print(transitions)
