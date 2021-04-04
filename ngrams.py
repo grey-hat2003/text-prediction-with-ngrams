@@ -1,7 +1,7 @@
 import os
 import re
 
-corpus = 'abc.txt'
+corpus = 'corpuses/testing.txt'
 
 first_words = {}
 second_words = {}

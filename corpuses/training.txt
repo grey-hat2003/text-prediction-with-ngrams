@@ -1,6 +1,5 @@
 hello there
 hello how are you
-hi pal 
 hey good morning
 hi good morning
 hello good afternoon
