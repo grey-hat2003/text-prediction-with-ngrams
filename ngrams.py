@@ -14,12 +14,12 @@ def add_to_dict(diction, key, val):
     
     diction[key].append(val)
 
-def update_dict(diction, key, val):
-    if key not in diction:
-        diction[key] = {}
+# def update_dict(diction, key, val):
+#     if key not in diction:
+#         diction[key] = {}
 
-    diction[key] = diction.get(val, 0) + 1
-    # no need of [value]
+#     diction[key] = diction.get(val, 0) + 1
+#     # no need of [value]
 
 
 def calculate_probab(listy):

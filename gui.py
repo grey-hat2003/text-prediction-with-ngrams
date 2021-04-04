@@ -7,7 +7,7 @@ ngrams.train_markov()
 
 box = Tk()
 box.geometry("400x250")
-box.title("Next word predictor")
+box.title("N-grams word predictor")
 
 
 expression = ""
