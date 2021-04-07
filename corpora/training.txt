@@ -1,14 +1,10 @@
-hello there
-hello how are you
-hey good morning
-hi good morning
-hello good afternoon
-hey good afternoon
-hi good afternoon
-hello good evening
-hey good evening
-hi good evening
-hello good evening
+how are you
+Hello
+Good morning
+Good afternoon
+Good evening
+It’s nice to meet you
+It’s a pleasure to meet you
 
 where are you going
 where do you live
@@ -34,12 +30,17 @@ how can I do that
 this is amazing
 this is wonderful
 this is fabulous
+this is awesome
 
 I am happy
 I am sad
 I am enjoying
 I am studying
 I am working
+I am fine
+I am good
+I am good, thanks, and you
+
 
 I like to read
 I like to cook
@@ -55,3 +56,11 @@ I don't like insects
 I don't like failures
 I don't like commerce
 I don't like sweets
+
+I am visiting the mall
+I am visiting the theatre
+I am visiting the market
+I am visiting the station
+
+
+
