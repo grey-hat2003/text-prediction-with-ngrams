@@ -35,7 +35,7 @@ def train_markov():
 
     for sentence in data_base:  #scanning through every line in our corpus
         
-        sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)    #clearing the sentence from any punctuation marks
+        sentence = re.sub(r"[,.\"\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)    #clearing the sentence from any punctuation marks
         #r -> string to be treated raw; ignore escape sequences
 
         words  = sentence.strip().lower().split()   #extracting words and make a list of the same
