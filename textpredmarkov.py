@@ -89,7 +89,7 @@ def suggest_first_words():
 
 
 def update_corpus(sentence):
-    sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)
+    sentence = re.sub(r"[,.\"\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)
     f = open(corpus, "a")
     f.write("\n" + sentence)
     f.close()
