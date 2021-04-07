@@ -1,7 +1,7 @@
 import os
 import re
 
-corpus = 'corpus\\a.txt'
+corpus = 'corpora/training.txt'
 
 first_words = {}
 second_words = {}
@@ -109,7 +109,7 @@ def suggestions(in_put):
 
         if(suggestion_list is not None):
             return sorted(suggestion_list, key = suggestion_list.get, reverse = True)
-            
+
     return []
 
 #train_markov()
