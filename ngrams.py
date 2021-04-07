@@ -40,7 +40,7 @@ def train_markov():
     #opening our corpus in read mode
 
     for sentence in data_base:       #scanning through every line in our corpus
-        sentence = re.sub(r"[,.\"\\!@#$%^&*(){}?/;:<>+=-]", "", sentence)   #clearing the sentence from any punctuation marks
+        sentence = re.sub(r"[,.\"\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)   #clearing the sentence from any punctuation marks
         words = sentence.strip().lower().split()    #extracting words and make a list of the same
         no_of_words = len(words)    #the size of this list gives us the number of words in that sentence
 
