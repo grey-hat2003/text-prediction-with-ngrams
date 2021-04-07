@@ -7,12 +7,12 @@ first_words = {}
 second_words = {}
 transitions = {}
 
-def add_to_dict(diction, key, val):
-    if key not in diction:
+def add_to_dict(dictionary, key, val):
+    if key not in dictionary:
         diction[key] = []
         #making an empty list as a value for the new key
     
-    diction[key].append(val)
+    dictionary[key].append(val)
 
 # def update_dict(diction, key, val):
 #     if key not in diction:
@@ -46,18 +46,16 @@ def train_markov():
 
         for x in range(no_of_words):
             #we iterate through every word of a sentence
-            #word variable is an individual word and x in the index or word number
+            #word variable is an individual word and x is the index or word number
             word = words[x]
 
-            if(x == 0):
+            if x == 0:
                 first_words[word] = first_words.get(word, 0) + 1
                 #we make a dict of all the possible first words as the key and calculate its frequency as the value
 
             else:
                 prev_word = words[x-1] #we extract the previous word 
 
-                if x == no_of_words - 1:
-                    add_to_dict(transitions, (prev_word, word), ' :( ')
 
                 if x == 1:
                     add_to_dict(second_words, prev_word, word)
@@ -83,33 +81,34 @@ def train_markov():
         transitions[word_group] = calculate_probab(next_words)
 
 def first_words_sort():
-    #sorts the first words dictionary
     return sorted(first_words, key = first_words.get, reverse = True)
 
 
 def update_corpus(sentence):
+    sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)
     f = open(corpus, "a")
     f.write("\n" + sentence)
     f.close()
 
 
 def suggestions(in_put):
+    
     if(type(in_put) == str):
-    #if the input is just a single word
-        suggestion = second_words.get(in_put)
-        #trying to suggest a 
-        if(suggestion is not None):
-            return sorted(suggestion, key = suggestion.get, reverse = True)
+        #sorted list (descending) of second occuring words based on their frequencies
+        suggestion_list = second_words.get(in_put)
+
+        if(suggestion_list is not None):
+            return sorted(suggestion_list, key = suggestion_list.get, reverse = True)
 
     if(type(in_put) == tuple):
-    #if the input is a string of words
-        suggestion = transitions.get(in_put)
+        #sorted list (descending) of words occuring after two words, based on their frequencies
+        suggestion_list = transitions.get(in_put)
 
-        if(suggestion == None):
-            return []
-        return sorted(suggestion, key = suggestion.get, reverse = True)
+        if(suggestion_list is not None):
+            return sorted(suggestion_list, key = suggestion_list.get, reverse = True)
 
     return []
+
 
 #train_markov()
 

@@ -7,19 +7,21 @@ first_words = {}
 second_words = {}
 transitions = {}
 
-#adds new words(values) to the dictionary based on the key
 def add_to_dict(dictionary, key, value):
     if key not in dictionary:
         dictionary[key] = []
+        #making an empty list as a value for the new key
+
     dictionary[key].append(value)
 
-#returns dictionary of words and their corresponding probabilities from the given list
+#returns dictionary of words and their corresponding frequencies from the given list
 def calculate_probab(listy):
     probab_dict = {}
     total_words = len(listy)
-    #loop to count words
+
     for word in listy:
-        probab_dict[word] = probab_dict.get(word,0) + 1
+        probab_dict[word] = probab_dict.get(word, 0) + 1
+
     """
     #loop to calculate probability of the words
     for word,word_count in probab_dict.items():
@@ -28,46 +30,52 @@ def calculate_probab(listy):
     return probab_dict
 
 def train_markov():
-    #MAIN LOGIC - MARKOV CHAIN MODEL
+    #this function is the real logic part. We are implementing markov chains here.
     data_base = open(corpus,'r')
 
-    #loop to iterate through every line in corpus
-    for sentence in data_base:
-        #remove any special characters  if ppresent and replace with whitespace
-        sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]"," ",sentence)
-        #r -> string to be treated raw;ignore escape sequences
-        words  = sentence.strip().lower().split()
-        #strip white spaces before/after sentences, convert to lowercase and split into a list
-        no_of_words = len(words)
+    for sentence in data_base:  #scanning through every line in our corpus
+        
+        sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)    #clearing the sentence from any punctuation marks
+        #r -> string to be treated raw; ignore escape sequences
+
+        words  = sentence.strip().lower().split()   #extracting words and make a list of the same
+        no_of_words = len(words)    #the size of this list gives us the number of words in that sentence
 
         for i in range(no_of_words):
+            #we iterate through every word of a sentence
+            #word variable is an individual word and 'i' is the index or word number
+
             word = words[i]
-            #store the 1st word in first_words
-            if(i==0):
-                #if word not present: add the word and initialize its counter to 0
-                first_words[word] = first_words.get(word,0) + 1
+            
+            if i == 0:
+                first_words[word] = first_words.get(word, 0) + 1
+                #we make a dict of all the possible first words as the key and calculate its frequency as the value
+
             else:
-                #get the previous word
-                prev_word = words[i-1]
+                prev_word = words[i-1]  #we extract the previous word
+
                 # if it is the last word add it to transitions dictionary with suggestion with end of sentence
                 #if(i==(no_of_words-1)):
                 #    add_to_dict(transitions,(prev_word,word),".")
                 #if it is a second word add to second_words dictionary
-                if(i==1):
-                    add_to_dict(second_words,prev_word,word)
-                #else add second_prev_wordand prev_word as key and word as value
+
+                if i == 1:
+                    add_to_dict(second_words, prev_word, word)
+
                 else:
                     second_prev_word = words[i-2]
-                    #print(second_prev_word,prev_word,word)
-                    add_to_dict(transitions, (second_prev_word,prev_word),word)
-    #probability dictionary of second possible words based on first word
-    for prev_word,next_words in second_words.items():
+                    add_to_dict(transitions, (second_prev_word, prev_word), word)
+
+    for prev_word, next_words in second_words.items():
+        #prev_word is the key and next_words is a list type value
         second_words[prev_word] = calculate_probab(next_words)
-    #probability of words based on previous two words
-    for prev_two_words,next_words in transitions.items():
+
+    for prev_two_words, next_words in transitions.items():
+        #prev_two_words is the key and next_words is a list type value
         transitions[prev_two_words] = calculate_probab(next_words)
+
+    """    
     #calculating probability of each word in the list
-    """
     #calculating probabilites of first occuring words
     total_first_words = sum(first_words.values())
     for word,count in first_words.items():
@@ -75,31 +83,33 @@ def train_markov():
     """
 
 
-#sorted list of first occuring words based on their probabilites in descending order
-#display suggestion when input is ""
+#display suggestions when input is ""
 def suggest_first_words():
     return sorted(first_words, key = first_words.get, reverse = True)
 
 
 def update_corpus(sentence):
-    sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]"," ",sentence)
-    f = open(corpus,"a")
-    f.write("\n"+sentence)
+    sentence = re.sub(r"[,.\"\'\\!@#$%^&*(){}?/;:<>+=-]", " ", sentence)
+    f = open(corpus, "a")
+    f.write("\n" + sentence)
     f.close()
 
 def suggestions(in_put):
-    #if input is a single word refer second_words
-    if(type(in_put)==str):
-        #sorted list of second occuring words based on their probabilites in descending order
-        suggestion_dict = second_words.get(in_put)
-        if(suggestion_dict is not None):
-            return sorted(suggestion_dict,key=suggestion_dict.get,reverse=True)
-    #if input are two words refer transitions dictionary
-    if(type(in_put)==tuple):
-        #sorted list of words, occuring after two words, based on their probabilites in descending order
-        suggestion_dict = transitions.get(in_put)
-        if(suggestion_dict is not None):
-            return sorted(suggestion_dict,key=suggestion_dict.get,reverse=True)
+    
+    if(type(in_put) == str):
+        #sorted list (descending) of second occuring words based on their frequencies
+        suggestion_list = second_words.get(in_put)
+
+        if(suggestion_list is not None):
+            return sorted(suggestion_list, key = suggestion_list.get, reverse = True)
+
+    if(type(in_put) == tuple):
+        #sorted list (descending) of words occuring after two words, based on their frequencies
+        suggestion_list = transitions.get(in_put)
+
+        if(suggestion_list is not None):
+            return sorted(suggestion_list, key = suggestion_list.get, reverse = True)
+            
     return []
 
 #train_markov()
