@@ -74,6 +74,7 @@ def train_markov():
         #prev_two_words is the key and next_words is a list type value
         transitions[prev_two_words] = calculate_probab(next_words)
 
+
     """    
     #calculating probability of each word in the list
     #calculating probabilites of first occuring words

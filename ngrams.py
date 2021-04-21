@@ -9,7 +9,7 @@ transitions = {}
 
 def add_to_dict(dictionary, key, val):
     if key not in dictionary:
-        diction[key] = []
+        dictionary[key] = []
         #making an empty list as a value for the new key
     
     dictionary[key].append(val)

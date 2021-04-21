@@ -2,6 +2,7 @@ from tkinter import *
 import textpredmarkov
 from gingerit.gingerit import GingerIt
 
+suggestions
 #INITIALIZATIONS
 bgcolor = "#71c5c6"#"#44a9ab"#"#071212"#"#183d3d"##"#121212"
 fgcolor = "#ffffff"
