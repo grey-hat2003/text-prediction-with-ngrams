@@ -1,5 +1,6 @@
 from tkinter import *
 import textpredmarkov
+from gingerit.gingerit import GingerIt
 
 #INITIALIZATIONS
 bgcolor = "#71c5c6"#"#44a9ab"#"#071212"#"#183d3d"##"#121212"
@@ -80,7 +81,9 @@ def btnClick(txtvar):
     inputField.icursor(END)
 
 def btnAdd():
-    sentence = " ".join(str(inputText.get()).lower().split())
+    sentence = " ".join(str(inputText.get()).split()) #removes extra spaces
+    result = GingerIt().parse(sentence) #corrects grammar and spellings
+    sentence = str(result['result']).lower() #convert to corpus format
     textpredmarkov.update_corpus(sentence)
     historylines.append(sentence)
     sentences = ""
