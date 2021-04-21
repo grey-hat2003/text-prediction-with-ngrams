@@ -1,44 +1,11 @@
 import os
 import re
-import language_tool_python
-tool = language_tool_python.LanguageTool('en-US')
 
 corpus = 'corpora/training.txt'
 
 first_words = {}
 second_words = {}
 transitions = {}
-
-def grammar_check(file):
-    file = open(corpus,'r')
-    matches = tool.check(file)
-    my_mistakes = []
-    my_corrections = []
-    start_positions = []
-    end_positions = []
- 
-    for rules in matches:
-        if len(rules.replacements)>0:
-            start_positions.append(rules.offset)
-            end_positions.append(rules.errorLength+rules.offset)
-            my_mistakes.append(file[rules.offset:rules.errorLength+rules.offset])
-            my_corrections.append(rules.replacements[0])
-     
-
-    my_new_text = list(file)
-
-    for m in range(len(start_positions)):
-        for i in range(len(file)):
-            my_new_text[start_positions[m]] = my_corrections[m]
-            if (i>start_positions[m] and i<end_positions[m]):
-                my_new_text[i] = ""
-        
-    my_new_text = "".join(my_new_text)
-
-    
-    
-
-
 
 def add_to_dict(dictionary, key, value):
     if key not in dictionary:

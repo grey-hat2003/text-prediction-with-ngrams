@@ -41,7 +41,6 @@ I am fine
 I am good
 I am good, thanks, and you
 
-
 I like to read
 I like to cook
 I like to dance
@@ -69,6 +68,3 @@ Are you free this morning
 Are you free this evening
 Are you free tonight
 Are you free tommorow 
-
-
-
